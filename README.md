@@ -109,19 +109,11 @@ For example, **January 2025 alone has over 22,000 high-quality repositories**.
 This is far more than the 1,000-result cap, making a simple monthly query impossible.
 
 **Solution (Daily Chunking and Pagination):**
-
 To solve this, we break the extraction into smaller, manageable chunks:
 
-	1. **Daily Chunking**: The 'main.py' script runs a loop for every day in the desired year. 
-						   For each day, it calls the 'fetch_one_date' function (from 'extractor.py'). 
-						   This assumes that no single day has more than 1,000 results. 
-						   This assumption should be validated against the 'total_count' logged for each day.
-	2. **Pagination**: The 'fetch_one_date' function handles the 100-item-per-page limit. 
-					   It runs an internal loop, requesting 'page=1', 'page=2', etc., for that single day, using the 'fetch_page' function for each request. 
-					   It stops when the API returns an empty list of items.
-	3. **Risk and Validation**: This process involves thousands of API calls. A single call failure (e.g., a network error) could cause data loss. 
-								To mitigate this, the 'fetch_page' function logs the 'total_count' for each day and implements a robust 'try/except' block with a retry mechanism. 
-								For a full validation, the final 'total_count' in the database should be compared against the sum of the logs.
+1.  **Daily Chunking**: The `main.py` script runs a loop for every day in the desired year. For each day, it calls the `fetch_one_date` function (from `extractor.py`). This assumes that no single day has more than 1,000 results. This assumption is validated against the `total_count` logged for each day.
+2.  **Pagination**: The `fetch_one_date` function handles the 100-item-per-page limit. It runs an internal loop, requesting `page=1`, `page=2`, etc., for that single day, using the `fetch_page` function for each request. It stops when the API returns an empty list of items.
+3.  **Risk and Validation**: This process involves thousands of API calls. A single call failure (e.g., a network error) could cause data loss. To mitigate this, the `fetch_page` function logs the `total_count` for each day and implements a robust `try/except` block with a retry mechanism. For a full validation, the final `total_count` in the database should be compared against the sum of the logs.
 
 ### 2. Transform
 

@@ -36,24 +36,24 @@ The pipeline follows a standard ETL flow, orchestrating data from the API to a f
 ## Project Structure
 
 '''
-	github_etl_project/
-	├── .env                  # Stores environment variables (NOT committed to Git)
-	├── .gitignore            # Specifies files for Git to ignore (e.g., .env, .venv)
-	├── docker-compose.yml    # Defines the 'postgres-db' and `metabase-app` services.
-	├── main.py               # Main entry point, orchestrates the ETL flow
-	├── requirements.txt      # List of Python dependencies
-	├── README.md             # This file.
-	├── src/
-	│   ├── __init__.py
-	│   ├── config.py         # Handles .env loading and connection strings
-	│   ├── extractor.py      # Handles all GitHub API extraction logic
-	│   ├── transformer.py    # Handles all data cleaning and transformation
-	│   └── loader.py         # Handles loading data into the database
-	├── sql/
-	│   ├── create_metrics.sql   # (Run once) Creates the Materialized Views.
-	│   └── refresh_metrics.sql  # (Run after ETL) Refreshes the Views.
-	└── logs/
-		└── etl.log            # ETL process log
+github_etl_project/
+├── .env                  # Stores environment variables (NOT committed to Git)
+├── .gitignore            # Specifies files for Git to ignore (e.g., .env, .venv)
+├── docker-compose.yml    # Defines the `postgres-db` and `metabase-app` services.
+├── main.py               # Main entry point, orchestrates the ETL flow
+├── requirements.txt      # List of Python dependencies
+├── README.md             # This file.
+├── src/
+│   ├── __init__.py
+│   ├── config.py         # Handles .env loading and connection strings
+│   ├── extractor.py      # Handles all GitHub API extraction logic
+│   ├── transformer.py    # Handles all data cleaning and transformation
+│   └── loader.py         # Handles loading data into the database
+├── sql/
+│   ├── create_metrics.sql   # (Run once) Creates the Materialized Views.
+│   └── refresh_metrics.sql  # (Run after ETL) Refreshes the Views.
+└── logs/
+    └── etl.log            # ETL process log
 '''
 
 ## The Data

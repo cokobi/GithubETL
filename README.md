@@ -35,7 +35,7 @@ The pipeline follows a standard ETL flow, orchestrating data from the API to a f
 
 ## Project Structure
 
-'''
+```
 github_etl_project/
 ├── .env                  # Stores environment variables (NOT committed to Git)
 ├── .gitignore            # Specifies files for Git to ignore (e.g., .env, .venv)
@@ -54,7 +54,7 @@ github_etl_project/
 │   └── refresh_metrics.sql  # (Run after ETL) Refreshes the Views.
 └── logs/
     └── etl.log            # ETL process log
-'''
+```
 
 ## The Data
 

@@ -137,15 +137,10 @@ The 'transformer.py' script receives the raw list of 'items' and performs severa
 
 ### 3. Load
 
-The loading strategy is handled by 'loader.py' and orchestrated by 'main.py'.
+The loading strategy is handled by `loader.py` and orchestrated by `main.py`:
 
-	- **Initial Load**: The 'run_full_etl()' function in 'main.py' performs the full historical backfill (e.g., for all of 2025). 
-						At the end of the run, it concatenates all daily DataFrames into one large DataFrame. 
-						The 'loader' then uses 'if_exists='replace'' to completely rebuild the 'repositories' table. 
-						This ensures a clean state for each full run.
-	- **Future Continuity (Daily Load)**: A new function, 'run_daily_load()', can be added to 'main.py' to run daily. 
-										  This function would only fetch data for "yesterday" and instruct the loader to use 'if_exists='append'' 
-										  to add new data without deleting the historical records.
+* **Initial Load**: The `run_full_etl()` function in `main.py` performs the full historical backfill. At the end of the run, it concatenates all daily DataFrames into one large DataFrame. The `loader` then uses `if_exists='replace'` to completely rebuild the `repositories` table. This ensures a clean state for each full run.
+* **Future Continuity (Daily Load)**: A new function, `run_daily_load()`, can be added to `main.py` to run daily. This function would only fetch data for "yesterday" and instruct the loader to use `if_exists='append'` to add new data without deleting the historical records.
 
 ## Setup and Installation
 
@@ -198,7 +193,7 @@ Create a file named **.env** in the root of the project directory. It must *not*
 
 Copy the following template into your **.env** file and fill in your values.
 
-'''env
+```
 	# .env
 
 	# --- GitHub ---
@@ -217,7 +212,7 @@ Copy the following template into your **.env** file and fill in your values.
 	# (Options: DEBUG, INFO, WARNING, ERROR)
 	LOG_LEVEL=INFO
 	LOG_DIR="logs"
-'''
+```
 
 ### 5. Database Setup (Docker)
 

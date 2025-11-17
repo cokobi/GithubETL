@@ -1,0 +1,35 @@
+services:
+  # Service 1: PostgreSQL
+  postgres-db:
+    image: postgres:latest
+    restart: always
+    container_name: my-postgres-db
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - etl-network
+
+  # Service 2: Metabase
+  metabase-app:
+    image: metabase/metabase:latest
+    container_name: my-metabase-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres-db
+    networks:
+      - etl-network
+
+volumes:
+  postgres-data:
+
+# connecting the services
+networks:
+  etl-network:
+    driver: bridge

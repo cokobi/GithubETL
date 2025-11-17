@@ -1,0 +1,3 @@
+REFRESH MATERIALIZED VIEW daily_repo_metrics;
+REFRESH MATERIALIZED VIEW language_summary;
+REFRESH MATERIALIZED VIEW top_creators;

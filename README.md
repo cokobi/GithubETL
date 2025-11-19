@@ -22,6 +22,29 @@ The scope of this project is to:
 
 The pipeline follows a standard ETL flow, orchestrating data from the API to a final database.
 
+```mermaid
+flowchart TB
+  subgraph dockr[" "];
+	  subgraph postgrs[" "];
+	        mv["SQL: Materialized Views"];
+	        pg["PostgreSQL DB - Raw Data"];
+	  end;
+	  viz["Metabase on Docker -
+			Materialized Views"];
+  end;
+  
+    api["Github REST API Source"] -->etl;
+    etl["Python ETL Script -
+	Pandas Transform Engine"] --> pg;
+    pg --> mv;
+    mv --> viz;
+    
+    style mv stroke-width:1px,stroke-dasharray: 1;
+    style viz stroke-width:1px,stroke-dasharray: 1;
+	style postgrs fill:#BBDEFB;
+	style dockr fill:#2962FF;
+```
+
 ## Technology Stack
 
 	- **Python 3.10+**
